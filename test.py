@@ -1,4 +1,5 @@
 import time_utils
+import os_utils
 
 # 测试获取时间戳
 def test_get_time():
@@ -8,4 +9,8 @@ def test_get_time():
 def test_get_current_time():
     print(time_utils.get_current_time())
 
-test_get_current_time()
+# 测试获取脚本文件的当前路径
+def test_get_current_path(upper_levels=0):
+    print(os_utils.get_current_path(upper_levels))
+
+test_get_current_path()
