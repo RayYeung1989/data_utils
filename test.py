@@ -1,5 +1,6 @@
 import time_utils
 import os_utils
+import data_process_utils
 
 # 测试获取时间戳
 def test_get_time():
@@ -13,4 +14,8 @@ def test_get_current_time():
 def test_get_current_path(upper_levels=0):
     print(os_utils.get_current_path(upper_levels))
 
-test_get_current_path()
+# 测试json有多少层
+def test_json_level(json_str):
+    print(data_process_utils.json_level(json_str))
+
+test_json_level('{"a":1,"b":2,"c":3}')
