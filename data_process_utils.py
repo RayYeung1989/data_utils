@@ -24,23 +24,37 @@ def special_char_rate(str):
     return count / len(str)
 
 # 判断是否异常文本
-def is_abnormal_text(text, Threshold=0.5):
+def is_abnormal_text(text, lenRange=(1,20), Threshold=0.4):
     """
     判断是否异常文本
     Args:
         text: 文本
-        Threshold: 文本中异常字符的占比阈值，默认为0.5
+        lenRange: 正常文本长度范围
+        Threshold: 文本中异常字符的占比阈值，默认为0.4
 
     Returns:
 
     """
-    print(special_char_rate(text))
-    if len(text) == 0:
+    if len(text) < lenRange[0] or len(text) > lenRange[1]:
         return True
     if special_char_rate(text) > Threshold:
         return True
     return False
 
+# pandas随机采样读取csv
+def random_sample_csv(csv_path, sample_size=1000, seed=None):
+    """
+    pandas随机采样读取csv
+    Args:
+        csv_path: csv文件路径
+        sample_size: 采样大小
+        seed: 随机种子
 
+    Returns:
+
+    """
+    df = pd.read_csv(csv_path)
+    df = df.sample(sample_size, random_state=seed)
+    return df
 
 
