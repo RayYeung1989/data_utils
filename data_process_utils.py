@@ -8,10 +8,10 @@ class DataProcessUtils:
         """
         初始化
         Args:
-            pands_or_modin: str, 'pands' or 'modin'
+            pands_or_modin: str, 'pandas' or 'modin'
         """
         self.pands_or_modin = pands_or_modin
-        if pands_or_modin == 'pands':
+        if pands_or_modin == 'pandas':
             import pandas as pd
         elif pands_or_modin == 'modin':
             import modin.pandas as pd
