@@ -1,5 +1,20 @@
 import pandas as pd
+# import modin.pandas as pd
 import json
+
+# 数据处理工具类
+class DataProcessUtils:
+    def __init__(self, pands_or_modin):
+        """
+        初始化
+        Args:
+            pands_or_modin: str, 'pands' or 'modin'
+        """
+        self.pands_or_modin = pands_or_modin
+        if pands_or_modin == 'pands':
+            import pandas as pd
+        elif pands_or_modin == 'modin':
+            import modin.pandas as pd
 
 # json有多少层
 def json_level(json_str):
@@ -42,7 +57,7 @@ def is_abnormal_text(text, lenRange=(1,20), Threshold=0.4):
     return False
 
 # pandas随机采样读取csv
-def random_sample_csv(csv_path, sample_size=1000, seed=None):
+def random_sample_csv(self, csv_path, sample_size=1000, seed=None):
     """
     pandas随机采样读取csv
     Args:

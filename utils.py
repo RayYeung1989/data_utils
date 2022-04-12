@@ -1,16 +1,21 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# import torch
+#
+# # for循环转cuda计算
+# def for_loop_to_cuda(func):
+#     def wrapper(*args, **kwargs):
+#         return func(*args, **kwargs).cuda()
+#     return wrapper
+#
+# def cuda(x):
+#     if torch.cuda.is_available():
+#         x = x.cuda()
+#     return x
+#
+# # 使用cuda编程进行for计算
+# def cuda_for_loop(x):
+#     if torch.cuda.is_available():
+#         x = x.cuda()
+#         for i in range(x.shape[0]):
+#             x[i] = x[i].cuda()
+#     return x
+#

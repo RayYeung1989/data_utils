@@ -32,3 +32,23 @@ class HiveUtils:
             print(e.args) # 访问异常的错误编号和详细信息
             conn.close()
             return None
+
+    # 分批查询
+    def get_data_by_batch(self, sql, batch_size=1000):
+        conn = jaydebeapi.connect(self.db_driver,
+                                  self.db_url, [self.db_user, self.db_pass], self.db_jdbc_jar)
+        try:
+            cursor = conn.cursor()
+            cursor.execute(sql)
+            while True:
+                rows = cursor.fetchmany(batch_size)
+                if not rows:
+                    break
+                yield rows
+            conn.close()
+        except Exception as e:
+            print(e.args) # 访问异常的错误编号和详细信息
+            conn.close()
+            return None
+
+
