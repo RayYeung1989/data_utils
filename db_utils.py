@@ -113,7 +113,7 @@ class RedisUtils:
         Returns: 设置是否成功
 
         """
-        return self.r.setx(key, timeout_s, value)
+        return self.r.setex(key, timeout_s, value)
 
     def set_data_ms(self, key, value, timeout_ms=None):
         """
@@ -126,7 +126,7 @@ class RedisUtils:
         Returns: 设置是否成功
 
         """
-        return self.r.setx(key, timeout_ms, value)
+        return self.r.setnx(key, timeout_ms, value)
 
     def set_data_by_batch(self, key_value_dict):
         """
@@ -137,7 +137,7 @@ class RedisUtils:
         Returns: 设置是否成功
 
         """
-        return self.r.mset(self.key_value_dict)
+        return self.r.mset(key_value_dict)
 
     def delete_data(self, key):
         """
