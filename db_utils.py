@@ -80,11 +80,11 @@ class RedisUtils:
         self.r = redis.Redis(connection_pool=self.pool)
         return self.r
 
-    def close_pool(self):
+    def close_connection(self):
         """
         关闭连接池
         """
-        self.pool.disconnect()
+        self.r.close()
 
     def get_data(self, key):
         """
