@@ -16,7 +16,7 @@ class DataProcessUtils:
         elif pands_or_modin == 'modin':
             import modin.pandas as pd
 
-# json有多少层
+# json层数
 def json_level(json_str):
     if isinstance(json_str, str):
         json_str = json.loads(json_str)
@@ -71,5 +71,6 @@ def random_sample_csv(self, csv_path, sample_size=1000, seed=None):
     df = pd.read_csv(csv_path)
     df = df.sample(sample_size, random_state=seed)
     return df
+
 
 
