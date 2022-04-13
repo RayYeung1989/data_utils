@@ -1,5 +1,6 @@
 import pandas as pd
 import jaydebeapi
+import redis
 
 class HiveUtils:
     """
@@ -50,5 +51,117 @@ class HiveUtils:
             print(e.args) # 访问异常的错误编号和详细信息
             conn.close()
             return None
+
+
+# redis工具类
+class RedisUtils:
+
+    def __init__(self, host, port, db=None, password=None):
+        """
+        初始化
+        Args:
+            host: redis主机
+            port: redis端口
+            db: redis数据库
+            password: redis密码
+        """
+        self.host = host
+        self.port = port
+        self.db = db
+        self.password = password
+
+    def connection_pool(self):
+        """
+        连接池
+        Returns: Redis实例
+
+        """
+        self.pool = redis.ConnectionPool(host=self.host, port=self.port, db=self.db, password=self.password)
+        self.r = redis.Redis(connection_pool=self.pool)
+        return self.r
+
+    def get_data(self, key):
+        """
+        获取数据
+        Args:
+            key: redis key
+
+        Returns: redis value
+
+        """
+        return self.r.get(key)
+
+    def get_data_by_batch(self, keys):
+        """
+        批量获取数据
+        Args:
+            keys: list 要批量获取的数据的Key列表
+
+        Returns: 获取回来的Value列表
+
+        """
+        return self.r.mget(keys)
+
+    def set_data_s(self, key, value, timeout_s=None):
+        """
+        设置数据（过期时间为秒）
+        Args:
+            key: redis key
+            value: redis value
+            timeout_s: redis过期时间，单位秒
+
+        Returns: 设置是否成功
+
+        """
+        return self.r.setx(key, timeout_s, value)
+
+    def set_data_ms(self, key, value, timeout_ms=None):
+        """
+        设置数据（过期时间为毫秒）
+        Args:
+            key: redis key
+            value: redis value
+            timeout_ms: redis过期时间，单位毫秒
+
+        Returns: 设置是否成功
+
+        """
+        return self.r.setx(key, timeout_ms, value)
+
+    def set_data_by_batch(self, key_value_dict):
+        """
+        批量设置数据
+        Args:
+            key_value_dict: key-value字典
+
+        Returns: 设置是否成功
+
+        """
+        return self.r.mset(self.key_value_dict)
+
+    def delete_data(self, key):
+        """
+        删除指定key的数据
+        Args:
+            key:
+
+        Returns:
+
+        """
+        return self.r.delete(key)
+
+    def delete_data_by_batch(self, keys):
+        """
+        批量删除指定key的数据
+        Args:
+            keys:
+
+        Returns:
+
+        """
+        return self.r.delete(keys)
+
+
+
 
 

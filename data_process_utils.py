@@ -115,3 +115,17 @@ def extract_json_value_data(x, k, field):
             # print(_[i][field])
     return lst
 
+# pandas dataframe的指定列去重
+def drop_duplicate_column(df, column):
+    """
+    pandas dataframe的指定列去重
+    Args:
+        df: pandas dataframe
+        column: 指定列
+
+    Returns:
+
+    """
+    df[column] = df[column].astype('str')
+    df.drop_duplicates(subset=column, keep='first', inplace=True)
+    return df
