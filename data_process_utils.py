@@ -72,5 +72,46 @@ def random_sample_csv(self, csv_path, sample_size=1000, seed=None):
     df = df.sample(sample_size, random_state=seed)
     return df
 
+# 抽取指定格式json里的字典key，返回list，json格式为{'xxxx':[{'key', 'value'}, {'key', 'value'}]}
+def extract_json_key_data(x, k):
+    """
+   抽取指定格式json里的字典key，返回list，json格式为{'xxxx':[{'key', 'value'}, {'key', 'value'}]}
+    Args:
+        x: json字符串
+        k: 'xxxx'字段
 
+    Returns: 字典key的list
+
+    """
+    # list(json.loads(jd_data["Relate"][0])['related_search_list'][0].keys())[0]
+    lst = []
+    if type(x) == str:
+        _ = json.loads(x)[k]
+        # print(_)
+        for i in range(len(_)):
+            lst.append(f'''{list(_[i].keys())[0]}''')
+            # print(list(_[i].keys())[0])
+    return lst
+
+# 抽取指定格式json里的字典value，返回list，json格式为{'xxxx':[{'key', 'value'}, {'key', 'value'}]}
+def extract_json_value_data(x, k, field):
+    """
+    抽取指定格式json里的字典value，返回list，json格式为{'xxxx':[{'key', 'value'}, {'key', 'value'}]}
+    Args:
+        x: json字符串
+        k: 'xxxx'字段
+        field: 抽取的字典value对应的key
+
+    Returns: 字典value的list
+
+    """
+    # list(json.loads(jd_data["Relate"][0])['related_search_list'][0].keys())[0]
+    lst = []
+    if type(x) == str:
+        _ = json.loads(x)[k]
+        # print(_)
+        for i in range(len(_)):
+            lst.append(f'''{_[i][field]}''')
+            # print(_[i][field])
+    return lst
 

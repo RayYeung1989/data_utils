@@ -35,3 +35,20 @@ def element_frequency(lst, sort_type=None):
     else:
         dict = dict.items() # 返回的是一个列表
     return dict
+
+# 筛选出列表中包含某字符的元素的列表
+def contains_str_list(lst, st):
+    """
+    筛选出列表中包含某字符的元素的列表
+    Args:
+        lst: 原列表
+        st: 判断是否包含的字符
+
+    Returns: 包含指定字符的元素的列表
+
+    """
+    tmpList = []
+    for i in range(len(lst)):
+        if st in lst[i]:
+            tmpList.append(lst[i])
+    return tmpList
