@@ -72,6 +72,23 @@ def random_sample_csv(self, csv_path, sample_size=1000, seed=None):
     df = df.sample(sample_size, random_state=seed)
     return df
 
+# pandas随机采样读取csv
+def random_sample_csv(csv_path, header=0, sample_size=1000, seed=None):
+    """
+    pandas随机采样读取csv
+    Args:
+        csv_path: csv文件路径
+        header: 设置表头
+        sample_size: 采样大小
+        seed: 随机种子
+
+    Returns:
+
+    """
+    df = pd.read_csv(csv_path, header)
+    df = df.sample(sample_size, random_state=seed)
+    return df
+
 # 抽取指定格式json里的字典key，返回list，json格式为{'xxxx':[{'key', 'value'}, {'key', 'value'}]}
 def extract_json_key_data(x, k):
     """

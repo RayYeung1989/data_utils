@@ -52,3 +52,19 @@ def contains_str_list(lst, st):
         if st in lst[i]:
             tmpList.append(lst[i])
     return tmpList
+
+def str_list_to_token_list(str_list):
+    """
+    字符串列表转换成token列表
+    Args:
+        str_list: 字符串列表
+
+    Returns: token列表
+
+    """
+    token_list = []
+    for i in range(len(str_list)):
+        token_list += str_list[i]
+
+    return token_list
+
